@@ -14,7 +14,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.whereToGo.R
 import com.example.whereToGo.model.Place
-import com.example.whereToGo.viewmodel.PlaceViewModel
+import com.example.whereToGo.utilities.Converters
+import com.example.whereToGo.viewmodel.PlaceViewModelDb
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -30,7 +31,7 @@ import kotlinx.android.synthetic.main.fragment_add.view.*
 
 class AddFragment : Fragment(), OnMapReadyCallback {
 
-    private lateinit var placeViewModel: PlaceViewModel
+    private lateinit var placeViewModelDb: PlaceViewModelDb
     private lateinit var mMap: GoogleMap
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private var positionMarker: Marker? = null
@@ -40,7 +41,7 @@ class AddFragment : Fragment(), OnMapReadyCallback {
 
         val view = inflater.inflate(R.layout.fragment_add, container, false)
 
-        placeViewModel = ViewModelProvider(this).get(PlaceViewModel::class.java)
+        placeViewModelDb = ViewModelProvider(this).get(PlaceViewModelDb::class.java)
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireContext())
         val mapFragment = childFragmentManager.findFragmentById(R.id.item_get_placeLocation) as SupportMapFragment
         mapFragment.getMapAsync(this)
@@ -95,17 +96,19 @@ class AddFragment : Fragment(), OnMapReadyCallback {
 
         if (img != null) {
 
+            val converter = Converters()
             // add to db
             val newPlace = Place(
-                1337,
+                0,
                 item_get_name.text.toString(),
                 item_get_description.text.toString(),
                 0,
-                img!!,
+                converter.fromBitmap(img!!).toString(),
                 positionMarker!!.position.latitude,
-                positionMarker!!.position.longitude
+                positionMarker!!.position.longitude,
+                "SPB"
             )
-            placeViewModel.addPlace(newPlace)
+            placeViewModelDb.addPlace(newPlace)
 
             // add to server
 

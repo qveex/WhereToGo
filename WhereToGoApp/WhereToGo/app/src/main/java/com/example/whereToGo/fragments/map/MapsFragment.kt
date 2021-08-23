@@ -2,7 +2,6 @@ package com.example.whereToGo.fragments.map
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,14 +9,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.whereToGo.R
 import com.example.whereToGo.model.ClusterMarker
-import com.example.whereToGo.model.Place
+import com.example.whereToGo.repository.ServerPlaceRepository
 import com.example.whereToGo.utilities.ClusterManagerRenderer
-import com.example.whereToGo.viewmodel.PlaceViewModel
+import com.example.whereToGo.utilities.Converters
+import com.example.whereToGo.viewmodel.PlaceViewModelDb
+import com.example.whereToGo.viewmodel.ServerPlaceViewModel
+import com.example.whereToGo.viewmodel.ServerPlaceViewModelFactory
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -29,22 +32,6 @@ import com.google.maps.GeoApiContext
 import com.google.maps.android.clustering.ClusterManager
 import com.vmadalin.easypermissions.EasyPermissions
 import com.vmadalin.easypermissions.dialogs.SettingsDialog
-import kotlinx.android.synthetic.main.fragment_add.*
-
-
-// Custom marks
-// https://www.youtube.com/watch?v=LrjybCD1tT0&ab_channel=CodingWithMitch
-// https://www.youtube.com/watch?v=U6Z8FkjGEb4&ab_channel=CodingWithMitch
-// https://developers.google.com/maps/documentation/android-sdk/marker?hl=ru#maps_android_markers_tag_sample-kotlin
-
-
-// Calc direction
-// https://www.youtube.com/watch?v=f47L1SL5S0o&ab_channel=CodingWithMitch
-
-// Polylines (shit)
-// https://www.youtube.com/watch?v=xl0GwkLNpNI&ab_channel=CodingWithMitch
-// https://www.youtube.com/watch?v=3f09neIN89o&ab_channel=CodingWithMitch
-// https://www.youtube.com/watch?v=4OOtuq5OCMs&ab_channel=CodingWithMitch
 
 // Сохранение состояния карты
 // https://developers.google.com/maps/documentation/android-sdk/current-place-tutorial?hl=ru
@@ -59,10 +46,8 @@ class MapsFragment : Fragment(), OnMapReadyCallback, EasyPermissions.PermissionC
     private val mClusterManager by lazy { ClusterManager<ClusterMarker>(requireContext(), mMap) }
     private val mClusterManagerRenderer by lazy { ClusterManagerRenderer(requireContext(), mMap, mClusterManager) }
 
-    //private lateinit var mClusterManager: ClusterManager<ClusterMarker>
-    //private lateinit var mClusterManagerRenderer: ClusterManagerRenderer
-
-    private lateinit var placeViewModel: PlaceViewModel
+    private lateinit var placeViewModelDb: PlaceViewModelDb
+    private lateinit var serverPlaceViewModel: ServerPlaceViewModel
 
     private val args by navArgs<MapsFragmentArgs>()
     private val DEFAULT_ZOOM = 15f
@@ -74,9 +59,11 @@ class MapsFragment : Fragment(), OnMapReadyCallback, EasyPermissions.PermissionC
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
-        placeViewModel = ViewModelProvider(this).get(PlaceViewModel::class.java)
-        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireContext())
+        val viewModelFactory = ServerPlaceViewModelFactory(ServerPlaceRepository())
 
+        serverPlaceViewModel = ViewModelProvider(this, viewModelFactory).get(ServerPlaceViewModel::class.java)
+        placeViewModelDb = ViewModelProvider(this).get(PlaceViewModelDb::class.java)
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireContext())
 
         /*val img1 = BitmapFactory.decodeResource(requireActivity().resources, R.drawable.a1)
         val img2 = BitmapFactory.decodeResource(requireActivity().resources, R.drawable.a2)
@@ -92,6 +79,11 @@ class MapsFragment : Fragment(), OnMapReadyCallback, EasyPermissions.PermissionC
         placeViewModel.addPlace(place2)
         placeViewModel.addPlace(place3)
         placeViewModel.addPlace(place4)*/
+
+        serverPlaceViewModel.getPlaces()
+        serverPlaceViewModel.myResponse.observe(requireActivity(), Observer { response ->
+            Log.i("Response", response.toString())
+        })
 
 
         return view
@@ -110,19 +102,18 @@ class MapsFragment : Fragment(), OnMapReadyCallback, EasyPermissions.PermissionC
 
         mClusterManager.renderer = mClusterManagerRenderer
 
-        placeViewModel.getAllData.observe(requireActivity(), {
+        placeViewModelDb.getAllData.observe(requireActivity(), {
 
             for (place in it) {
 
+                val converter = Converters()
                 val snippet = place.visitCounter.toString()
-                val img = place.placeImage
+                val img = place.image
                 val location = LatLng(place.latitude, place.longitude)
                 val title = place.name
 
-                val newClusterMarker = ClusterMarker(location, title, snippet, img, place)
+                val newClusterMarker = ClusterMarker(location, title, snippet, converter.toBitmap(img.toByteArray()), place)
                 mClusterManager.addItem(newClusterMarker)
-
-                Log.i("location", place.toString())
 
                 // add mark to list of ALL THE MARKERS (to remove or smth other)
             }

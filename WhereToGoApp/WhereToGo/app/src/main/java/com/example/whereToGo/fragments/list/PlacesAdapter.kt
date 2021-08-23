@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.whereToGo.utilities.PlaceDiffUtill
 import com.example.whereToGo.R
 import com.example.whereToGo.model.Place
+import com.example.whereToGo.utilities.Converters
 import kotlinx.android.synthetic.main.place_item_row.view.*
 
 class PlacesAdapter: RecyclerView.Adapter<PlacesAdapter.MyViewHolder>() {
@@ -32,8 +33,9 @@ class PlacesAdapter: RecyclerView.Adapter<PlacesAdapter.MyViewHolder>() {
         holder.itemView.counter_text.text = "Уже посетили: ${currentItem.visitCounter}" // getString not works
         holder.itemView.place_counter.isVisible = false
         //holder.itemView.place_counter.text = currentItem.visitCounter.toString()
-        //holder.itemView.place_image.load(currentItem.placeImage)
-        holder.itemView.place_image.setImageBitmap(currentItem.placeImage)
+        //holder.itemView.place_image.load(currentItem.image)
+        val converter = Converters()
+        holder.itemView.place_image.setImageBitmap(converter.toBitmap(currentItem.image.toByteArray()))
 
         holder.itemView.place_layout.setOnClickListener {
 

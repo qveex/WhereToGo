@@ -10,7 +10,7 @@ import com.example.whereToGo.repository.PlaceRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class PlaceViewModel(application: Application): AndroidViewModel(application) {
+class PlaceViewModelDb(application: Application): AndroidViewModel(application) {
 
     val getAllData: LiveData<List<Place>>
     private val repository: PlaceRepository

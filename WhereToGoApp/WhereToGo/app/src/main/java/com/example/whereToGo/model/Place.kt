@@ -1,6 +1,5 @@
 package com.example.whereToGo.model
 
-import android.graphics.Bitmap
 import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -14,8 +13,9 @@ data class Place(
     val name: String,
     val description: String,
     val visitCounter: Int,
-    val placeImage: Bitmap,
+    val image: String,
 
     val latitude: Double,
-    val longitude: Double
+    val longitude: Double,
+    val city: String
 ): Parcelable

@@ -1,7 +1,6 @@
 package com.example.database
 
 import com.example.models.Place
-import io.ktor.util.*
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.transactions.experimental.newSuspendedTransaction
 
@@ -29,7 +28,7 @@ class PlaceDao {
     suspend fun get(id: Int) = newSuspendedTransaction {
         val p = Places.select { Places.id eq id }.map { Places.toPlace(it) }
         if (p.isEmpty()) return@newSuspendedTransaction null
-        else return@newSuspendedTransaction p
+        else return@newSuspendedTransaction p.first()
     }
 
     suspend fun getPlacesFromCity(city: String) = newSuspendedTransaction {
