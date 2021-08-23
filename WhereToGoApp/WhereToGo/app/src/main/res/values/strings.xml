@@ -1,0 +1,13 @@
+<resources>
+
+    <string name="app_name">Куда пойти</string>
+    <string name="google_maps_API_key">AIzaSyDBqcAPNNB2Czt4BYxoov7Cw6-SU0WFXWw</string>
+    <string name="MAPVIEW_BUNDLE_KEY">MapViewBundleKey</string>
+
+
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="place_counter_i">Уже посетили: %1$s</string>
+    <string name="place_counter">Уже посетили:</string>
+
+</resources>
