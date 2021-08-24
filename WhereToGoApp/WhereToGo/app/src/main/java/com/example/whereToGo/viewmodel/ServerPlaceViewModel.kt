@@ -6,10 +6,11 @@ import androidx.lifecycle.viewModelScope
 import com.example.whereToGo.model.Place
 import com.example.whereToGo.repository.ServerPlaceRepository
 import kotlinx.coroutines.launch
+import retrofit2.Response
 
 class ServerPlaceViewModel(private val repository: ServerPlaceRepository): ViewModel() {
 
-    val myResponse: MutableLiveData<List<Place>> = MutableLiveData()
+    val myResponse: MutableLiveData<Response<List<Place>>> = MutableLiveData()
 
     fun getPlaces() {
         viewModelScope.launch {

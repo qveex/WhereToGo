@@ -82,7 +82,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback, EasyPermissions.PermissionC
 
         serverPlaceViewModel.getPlaces()
         serverPlaceViewModel.myResponse.observe(requireActivity(), Observer { response ->
-            Log.i("Response", response.toString())
+            if (response.isSuccessful) Log.i("Response", response.body().toString())
         })
 
 
