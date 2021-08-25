@@ -9,4 +9,12 @@ class ServerPlaceRepository {
     suspend fun getPlaces(): Response<List<Place>> {
         return RetrofitInstance.api.getPlaces()
     }
+
+    suspend fun getPlace(id: Int): Response<Place> {
+        return RetrofitInstance.api.getPlace(id)
+    }
+
+    suspend fun getCity(city: String): Response<List<Place>> {
+        return RetrofitInstance.api.getCity(city)
+    }
 }

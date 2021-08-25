@@ -66,23 +66,15 @@ class MapsFragment : Fragment(), OnMapReadyCallback, EasyPermissions.PermissionC
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireContext())
 
         /*val img1 = BitmapFactory.decodeResource(requireActivity().resources, R.drawable.a1)
-        val img2 = BitmapFactory.decodeResource(requireActivity().resources, R.drawable.a2)
-        val img3 = BitmapFactory.decodeResource(requireActivity().resources, R.drawable.a3)
-        val img4 = BitmapFactory.decodeResource(requireActivity().resources, R.drawable.a4)
+        val place1 = Place(0,"Парк", "Небольшой зеленый парк со скамейками", 12, img1, 59.893228, 30.417227)*/
 
-
-        val place1 = Place(0,"Парк", "Небольшой зеленый парк со скамейками", 12, img1, 59.893228, 30.417227)
-        val place2 = Place(0,"Исаакиевский собор", "Большой и красивый собор с парком и площадью рядом", 999, img2, 59.933792, 30.306833)
-        val place3 = Place(0,"Сенная площадь", "Большая площадь с красивым видом, магазинами и кафе", 501, img3, 59.927016, 30.319184)
-        val place4 = Place(0,"ГУАП", "Чесменский дворец, страшное место, не советуем туда ходить", 0, img4, 59.857597, 30.327792)
-        placeViewModel.addPlace(place1)
-        placeViewModel.addPlace(place2)
-        placeViewModel.addPlace(place3)
-        placeViewModel.addPlace(place4)*/
-
-        serverPlaceViewModel.getPlaces()
-        serverPlaceViewModel.myResponse.observe(requireActivity(), Observer { response ->
-            if (response.isSuccessful) Log.i("Response", response.body().toString())
+        serverPlaceViewModel.getPlace(1)
+        serverPlaceViewModel.singleResponse.observe(requireActivity(), Observer { response ->
+            if (response.isSuccessful) {
+                Log.i("Response", response.body().toString())
+            } else {
+                Log.i("Response", response.code().toString())
+            }
         })
 
 

@@ -10,12 +10,27 @@ import retrofit2.Response
 
 class ServerPlaceViewModel(private val repository: ServerPlaceRepository): ViewModel() {
 
-    val myResponse: MutableLiveData<Response<List<Place>>> = MutableLiveData()
+    val listResponse: MutableLiveData<Response<List<Place>>> = MutableLiveData()
+    val singleResponse: MutableLiveData<Response<Place>> = MutableLiveData()
 
     fun getPlaces() {
         viewModelScope.launch {
             val response = repository.getPlaces()
-            myResponse.value = response
+            listResponse.value = response
+        }
+    }
+
+    fun getPlace(id: Int) {
+        viewModelScope.launch {
+            val response = repository.getPlace(id)
+            singleResponse.value = response
+        }
+    }
+
+    fun getCity(city: String) {
+        viewModelScope.launch {
+            val response = repository.getCity(city)
+            listResponse.value = response
         }
     }
 }
