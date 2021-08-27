@@ -14,13 +14,17 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e85c8465-9c12-440a-98f3-ea2ca117e509" name="Default Changelist" comment="" />
+    <list default="true" id="e85c8465-9c12-440a-98f3-ea2ca117e509" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../../WhereToGoServer/Places.mv.db" beforeDir="false" afterPath="$PROJECT_DIR$/../../WhereToGoServer/Places.mv.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WhereToGoServer/src/main/kotlin/com/example/Application.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../../WhereToGoServer/src/main/kotlin/com/example/Application.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WhereToGoServer/src/main/kotlin/com/example/routes/PlaceRoutes.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../../WhereToGoServer/src/main/kotlin/com/example/routes/PlaceRoutes.kt" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[a3a3d1727d24]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[C:\Users\User\.android\avd\Pixel_4a_API_30.avd]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />

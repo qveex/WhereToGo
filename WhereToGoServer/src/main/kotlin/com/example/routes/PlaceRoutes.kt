@@ -8,14 +8,21 @@ import io.ktor.request.*
 import io.ktor.response.*
 import io.ktor.routing.*
 
-fun Route.placeRouting() {
+fun Route.placesRouting() {
 
     val placeDao = PlaceDao()
 
-    route("/place") {
+    route("/places") {
 
         get {
-            val places = placeDao.getAll()
+
+            val city = call.request.queryParameters["city"]
+            val places =
+                if (city != null)
+                    placeDao.getPlacesFromCity(city)
+                else
+                    placeDao.getAll()
+
             if (places.isNotEmpty()) call.respond(places)
             else call.respondText("No places found", status = HttpStatusCode.NotFound)
         }
@@ -60,7 +67,7 @@ fun Route.placeRouting() {
 
 fun Application.registerPlaceRoutes() {
     routing {
-        placeRouting()
+        placesRouting()
     }
 }
 
