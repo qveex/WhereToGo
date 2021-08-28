@@ -8,6 +8,6 @@ class ServerPlaceViewModelFactory(
     private val repository: ServerPlaceRepository
     ): ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return ServerPlaceViewModel(repository) as T
+        return PlaceViewModelServer(repository) as T
     }
 }

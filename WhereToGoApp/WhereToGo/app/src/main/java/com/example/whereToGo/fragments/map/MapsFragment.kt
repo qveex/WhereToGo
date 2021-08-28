@@ -2,27 +2,20 @@ package com.example.whereToGo.fragments.map
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.graphics.BitmapFactory
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.whereToGo.R
 import com.example.whereToGo.model.ClusterMarker
-import com.example.whereToGo.model.Place
-import com.example.whereToGo.repository.ServerPlaceRepository
 import com.example.whereToGo.utilities.ClusterManagerRenderer
 import com.example.whereToGo.utilities.Converters
 import com.example.whereToGo.viewmodel.PlaceViewModelDb
-import com.example.whereToGo.viewmodel.ServerPlaceViewModel
-import com.example.whereToGo.viewmodel.ServerPlaceViewModelFactory
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -49,7 +42,6 @@ class MapsFragment : Fragment(), OnMapReadyCallback, EasyPermissions.PermissionC
     private val mClusterManagerRenderer by lazy { ClusterManagerRenderer(requireContext(), mMap, mClusterManager) }
 
     private lateinit var placeViewModelDb: PlaceViewModelDb
-    private lateinit var serverPlaceViewModel: ServerPlaceViewModel
 
     private val args by navArgs<MapsFragmentArgs>()
     private val DEFAULT_ZOOM = 15f
@@ -61,27 +53,8 @@ class MapsFragment : Fragment(), OnMapReadyCallback, EasyPermissions.PermissionC
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
-        val viewModelFactory = ServerPlaceViewModelFactory(ServerPlaceRepository())
-
-        serverPlaceViewModel = ViewModelProvider(this, viewModelFactory).get(ServerPlaceViewModel::class.java)
         placeViewModelDb = ViewModelProvider(this).get(PlaceViewModelDb::class.java)
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireContext())
-
-        val img1 = BitmapFactory.decodeResource(requireActivity().resources, R.drawable.a1)
-        val converter = Converters()
-        val place = Place(0,"ГУАП БМ", "Государственный университет аэрокосмического приборостроения", 256, converter.fromBitmap(img1).toString(), 59.929418, 30.296744, "Saint Petersburg")
-
-        serverPlaceViewModel.createPlace(place)
-        serverPlaceViewModel.singleResponse.observe(requireActivity(), Observer { response ->
-            if (response.isSuccessful) {
-                Log.i("Response", response.body().toString())
-                Log.i("Response", response.code().toString())
-                Log.i("Response", response.message())
-            } else {
-                Log.i("Response", response.code().toString())
-            }
-        })
-
 
         return view
     }

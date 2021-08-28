@@ -4,18 +4,23 @@ import android.annotation.SuppressLint
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.whereToGo.R
 import com.example.whereToGo.model.Place
+import com.example.whereToGo.repository.ServerPlaceRepository
 import com.example.whereToGo.utilities.Converters
 import com.example.whereToGo.viewmodel.PlaceViewModelDb
+import com.example.whereToGo.viewmodel.PlaceViewModelServer
+import com.example.whereToGo.viewmodel.ServerPlaceViewModelFactory
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -32,6 +37,7 @@ import kotlinx.android.synthetic.main.fragment_add.view.*
 class AddFragment : Fragment(), OnMapReadyCallback {
 
     private lateinit var placeViewModelDb: PlaceViewModelDb
+    private lateinit var placeViewModelServer: PlaceViewModelServer
     private lateinit var mMap: GoogleMap
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private var positionMarker: Marker? = null
@@ -41,6 +47,8 @@ class AddFragment : Fragment(), OnMapReadyCallback {
 
         val view = inflater.inflate(R.layout.fragment_add, container, false)
 
+        val viewModelFactory = ServerPlaceViewModelFactory(ServerPlaceRepository())
+        placeViewModelServer = ViewModelProvider(this, viewModelFactory).get(PlaceViewModelServer::class.java)
         placeViewModelDb = ViewModelProvider(this).get(PlaceViewModelDb::class.java)
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireContext())
         val mapFragment = childFragmentManager.findFragmentById(R.id.item_get_placeLocation) as SupportMapFragment
@@ -97,7 +105,7 @@ class AddFragment : Fragment(), OnMapReadyCallback {
         if (img != null) {
 
             val converter = Converters()
-            // add to db
+
             val newPlace = Place(
                 0,
                 item_get_name.text.toString(),
@@ -106,13 +114,23 @@ class AddFragment : Fragment(), OnMapReadyCallback {
                 converter.fromBitmap(img!!).toString(),
                 positionMarker!!.position.latitude,
                 positionMarker!!.position.longitude,
-                "SPB"
+                "Saint Petersburg"
             )
-            placeViewModelDb.addPlace(newPlace)
+            // add to db
+            //placeViewModelDb.addPlace(newPlace)
 
             // add to server
 
-
+            placeViewModelServer.createPlace(newPlace)
+            placeViewModelServer.singleResponse.observe(requireActivity(), Observer { response ->
+                if (response.isSuccessful) {
+                    Log.i("Response", response.body().toString())
+                    Log.i("Response", response.code().toString())
+                    Log.i("Response", response.message())
+                } else {
+                    Log.i("Response", response.code().toString())
+                }
+            })
 
             Toast.makeText(requireContext(), "Место добавлено успешно!", Toast.LENGTH_LONG).show()
             findNavController().navigate(R.id.action_addFragment_to_mapsFragment)

@@ -45,4 +45,10 @@ class PlaceViewModelDb(application: Application): AndroidViewModel(application) 
         }
     }
 
+    fun addPlaces(places: List<Place>) {
+        viewModelScope.launch(Dispatchers.IO) {
+            places.forEach { repository.addPlace(it) }
+        }
+    }
+
 }

@@ -8,7 +8,7 @@ import com.example.whereToGo.repository.ServerPlaceRepository
 import kotlinx.coroutines.launch
 import retrofit2.Response
 
-class ServerPlaceViewModel(private val repository: ServerPlaceRepository): ViewModel() {
+class PlaceViewModelServer(private val repository: ServerPlaceRepository): ViewModel() {
 
     val listResponse: MutableLiveData<Response<List<Place>>> = MutableLiveData()
     val singleResponse: MutableLiveData<Response<Place>> = MutableLiveData()

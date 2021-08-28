@@ -20,7 +20,7 @@ class PlaceFragment : Fragment() {
 
         val view = inflater.inflate(R.layout.fragment_place, container, false)
         val converter = Converters()
-        view.item_image.setImageBitmap(converter.toBitmap(args.currentPlace.image.toByteArray()))
+        //view.item_image.setImageBitmap(converter.toBitmap(args.currentPlace.image.toByteArray()))
         view.item_name.text = args.currentPlace.name
         view.item_counter.text = getString(R.string.place_counter_i, args.currentPlace.visitCounter.toString())
         //view.item_address.text = args.currentPlace.name
