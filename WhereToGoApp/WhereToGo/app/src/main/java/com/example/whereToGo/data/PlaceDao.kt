@@ -7,7 +7,7 @@ import com.example.whereToGo.model.Place
 @Dao
 interface PlaceDao {
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addPlace(place: Place)
 
     @Update

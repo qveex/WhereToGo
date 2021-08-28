@@ -33,4 +33,11 @@ class ServerPlaceViewModel(private val repository: ServerPlaceRepository): ViewM
             listResponse.value = response
         }
     }
+
+    fun createPlace(place: Place) {
+        viewModelScope.launch {
+            val response = repository.createPlace(place)
+            singleResponse.value = response
+        }
+    }
 }

@@ -2,6 +2,7 @@ package com.example.whereToGo.fragments.map
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -15,6 +16,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.whereToGo.R
 import com.example.whereToGo.model.ClusterMarker
+import com.example.whereToGo.model.Place
 import com.example.whereToGo.repository.ServerPlaceRepository
 import com.example.whereToGo.utilities.ClusterManagerRenderer
 import com.example.whereToGo.utilities.Converters
@@ -65,13 +67,16 @@ class MapsFragment : Fragment(), OnMapReadyCallback, EasyPermissions.PermissionC
         placeViewModelDb = ViewModelProvider(this).get(PlaceViewModelDb::class.java)
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireContext())
 
-        /*val img1 = BitmapFactory.decodeResource(requireActivity().resources, R.drawable.a1)
-        val place1 = Place(0,"Парк", "Небольшой зеленый парк со скамейками", 12, img1, 59.893228, 30.417227)*/
+        val img1 = BitmapFactory.decodeResource(requireActivity().resources, R.drawable.a1)
+        val converter = Converters()
+        val place = Place(0,"ГУАП БМ", "Государственный университет аэрокосмического приборостроения", 256, converter.fromBitmap(img1).toString(), 59.929418, 30.296744, "Saint Petersburg")
 
-        serverPlaceViewModel.getPlace(1)
+        serverPlaceViewModel.createPlace(place)
         serverPlaceViewModel.singleResponse.observe(requireActivity(), Observer { response ->
             if (response.isSuccessful) {
                 Log.i("Response", response.body().toString())
+                Log.i("Response", response.code().toString())
+                Log.i("Response", response.message())
             } else {
                 Log.i("Response", response.code().toString())
             }

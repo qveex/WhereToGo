@@ -17,4 +17,8 @@ class ServerPlaceRepository {
     suspend fun getCity(city: String): Response<List<Place>> {
         return RetrofitInstance.api.getCity(city)
     }
+
+    suspend fun createPlace(place: Place): Response<Place> {
+        return RetrofitInstance.api.createPlace(place)
+    }
 }

@@ -2,13 +2,11 @@ package com.example.whereToGo.api
 
 import com.example.whereToGo.model.Place
 import retrofit2.Response
-import retrofit2.http.GET
-import retrofit2.http.Path
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface PlaceApi {
 
-    @GET("/places")
+    @GET("places")
     suspend fun getPlaces(): Response<List<Place>>
 
     @GET("places/{id}")
@@ -16,4 +14,7 @@ interface PlaceApi {
 
     @GET("places")
     suspend fun getCity(@Query("city") city: String): Response<List<Place>>
+
+    @POST("places")
+    suspend fun createPlace(@Body place: Place): Response<Place>
 }

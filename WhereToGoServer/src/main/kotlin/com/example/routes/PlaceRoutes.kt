@@ -46,8 +46,21 @@ fun Route.placesRouting() {
         post {
             val place = call.receive<Place>()
             placeDao.add(place)
-            call.respondText("Place stored correctly", status = HttpStatusCode.Created)
+            call.respond(place)
 
+        }
+
+        get("delete/{id}") {
+            val id = call.parameters["id"] ?: return@get call.respond(HttpStatusCode.BadRequest)
+            try { id.toInt() } catch (e: Exception) { return@get call.respondText(
+                "No place with id $id",
+                status = HttpStatusCode.BadRequest)
+            }
+            if (placeDao.delete(id.toInt())) {
+                call.respondText("Place removed correctly", status = HttpStatusCode.Accepted)
+            } else {
+                call.respondText("Not Found", status = HttpStatusCode.NotFound)
+            }
         }
 
         delete("{id}") {
