@@ -1,0 +1,52 @@
+[
+  {
+    "id": 1,
+    "name": "Парк",
+    "description": "Небольшой зеленый парк со скамейками",
+    "visitCounter": 12,
+    "image": "img1",
+    "latitude": 59.893228,
+    "longitude": 30.417227,
+    "city": "Saint Petersburg"
+  },
+  {
+    "id": 2,
+    "name": "Исаакиевский собор",
+    "description": "Большой и красивый собор с парком и площадью рядом",
+    "visitCounter": 999,
+    "image": "img2",
+    "latitude": 59.933792,
+    "longitude": 30.306833,
+    "city": "Saint Petersburg"
+  },
+  {
+    "id": 3,
+    "name": "Сенная площадь",
+    "description": "Большая площадь с красивым видом, магазинами и кафе",
+    "visitCounter": 501,
+    "image": "img3",
+    "latitude": 59.927016,
+    "longitude": 30.319184,
+    "city": "Saint Petersburg"
+  },
+  {
+    "id": 4,
+    "name": "ГУАП",
+    "description": "Чесменский дворец, страшное место, не советуем туда ходить",
+    "visitCounter": 0,
+    "image": "img4",
+    "latitude": 59.857597,
+    "longitude": 30.327792,
+    "city": "Saint Petersburg"
+  },
+  {
+    "id": 5,
+    "name": "ГУАП БМ",
+    "description": "Государственный университет аэрокосмического приборостроения",
+    "visitCounter": 256,
+    "image": "[B@5c63b3f",
+    "latitude": 59.929418,
+    "longitude": 30.296744,
+    "city": "Saint Petersburg"
+  }
+]

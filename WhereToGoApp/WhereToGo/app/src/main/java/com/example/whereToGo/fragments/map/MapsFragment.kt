@@ -2,7 +2,9 @@ package com.example.whereToGo.fragments.map
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -72,17 +74,18 @@ class MapsFragment : Fragment(), OnMapReadyCallback, EasyPermissions.PermissionC
 
         mClusterManager.renderer = mClusterManagerRenderer
 
-        placeViewModelDb.getAllData.observe(requireActivity(), {
+        placeViewModelDb.getAllData.observe(requireActivity()) { places ->
 
-            for (place in it) {
+            for (place in places) {
 
-                val converter = Converters()
                 val snippet = place.visitCounter.toString()
                 val img = place.image
                 val location = LatLng(place.latitude, place.longitude)
                 val title = place.name
 
-                val newClusterMarker = ClusterMarker(location, title, snippet, converter.toBitmap(img.toByteArray()), place)
+                val tmpImage = BitmapFactory.decodeResource(resources, R.drawable.a1)
+
+                val newClusterMarker = ClusterMarker(place.id, location, title, snippet, img, place)
                 mClusterManager.addItem(newClusterMarker)
 
                 // add mark to list of ALL THE MARKERS (to remove or smth other)
@@ -90,11 +93,14 @@ class MapsFragment : Fragment(), OnMapReadyCallback, EasyPermissions.PermissionC
             mClusterManager.cluster()
 
             mMap.setOnInfoWindowClickListener { m ->
-                val action = MapsFragmentDirections.actionMapsFragmentToPlaceFragment(it.first())
+                val action = MapsFragmentDirections
+                    .actionMapsFragmentToPlaceFragment(
+                        places.find { LatLng(it.latitude, it.longitude) == m.position }!!
+                    )
                 findNavController().navigate(action)
             }
 
-        })
+        }
     }
 
 

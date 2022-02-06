@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Kuda_poyti.iml" filepath="$PROJECT_DIR$/.idea/modules/Kuda_poyti.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Kuda_poyti.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Kuda_poyti.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/WhereToGo.iml" filepath="$PROJECT_DIR$/.idea/modules/WhereToGo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/WhereToGo.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/WhereToGo.app.iml" />
     </modules>
   </component>
 </project>

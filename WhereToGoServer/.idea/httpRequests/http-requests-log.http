@@ -1,0 +1,91 @@
+POST http://127.0.0.1:1111/places
+Content-Type: application/json
+
+{
+	"id":"111",
+	"name":"Сад",
+	"description":"Палевский",
+	"visitCounter":"1222",
+	"image":"img1",
+	"latitude":"59.893228",
+	"longitude":"30.417227",
+	"city": "SPB"
+}
+
+<> 2021-09-06T204304.200.json
+
+###
+
+POST http://127.0.0.1:1111/places
+
+Content-Type: application/json
+
+{
+	"id":"228",
+	"name":"Сад",
+	"description":"Палевский",
+	"visitCounter":"1222",
+	"image":"img1",
+	"latitude":"59.893228",
+	"longitude":"30.417227",
+	"city": "SPB"
+}
+
+###
+
+POST http://127.0.0.1:1111/places
+
+Content-Type: application/json
+
+{
+    "id": 6,
+    "name": "ГУАП БМ",
+    "description": "Государственный университет аэрокосмического приборостроения",
+    "visitCounter": 256,
+    "image": "[B@5c63b3f",
+    "latitude": 59.929418,
+    "longitude": 30.296744,
+    "city": "Saint Petersburg"
+}
+
+###
+
+GET http://127.0.0.1:1111/places
+
+<> 2021-09-06T195659.200.json
+
+###
+
+GET http://127.0.0.1:1111/places
+
+<> 2021-09-06T195648.200.json
+
+###
+
+POST http://127.0.0.1:1111/places
+
+Content-Type: application/json
+
+{
+    "id": 5,
+    "name": "ГУАП БМ",
+    "description": "Государственный университет аэрокосмического приборостроения",
+    "visitCounter": 256,
+    "image": "[B@5c63b3f",
+    "latitude": 59.929418,
+    "longitude": 30.296744,
+    "city": "Saint Petersburg"
+}
+
+###
+
+GET http://127.0.0.1:1111/places
+
+<> 2021-09-06T195322.200.json
+
+###
+
+GET http://localhost/places
+
+###
+

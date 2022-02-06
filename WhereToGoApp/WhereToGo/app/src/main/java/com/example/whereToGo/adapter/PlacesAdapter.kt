@@ -31,8 +31,7 @@ class PlacesAdapter: RecyclerView.Adapter<PlacesAdapter.MyViewHolder>() {
         holder.itemView.place_name.text = currentItem.name
         holder.itemView.counter_text.text = "Уже посетили: ${currentItem.visitCounter}" // getString not works
         holder.itemView.place_counter.isVisible = false
-        //val converter = Converters()
-        //holder.itemView.place_image.setImageBitmap(converter.toBitmap(currentItem.image.toByteArray()))
+        holder.itemView.place_image.setImageBitmap(currentItem.image)
 
         holder.itemView.place_layout.setOnClickListener {
 

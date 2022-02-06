@@ -6,7 +6,7 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="Response" />
+    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="Marker" />
     <option name="TOOL_WINDOW_LOG_LEVEL" value="info" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
@@ -15,7 +15,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e85c8465-9c12-440a-98f3-ea2ca117e509" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../../WhereToGoServer/.idea/codeStyles/Project.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../WhereToGoServer/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WhereToGoServer/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../WhereToGoServer/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WhereToGoServer/.idea/modules.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../WhereToGoServer/Places.mv.db" beforeDir="false" afterPath="$PROJECT_DIR$/../../WhereToGoServer/Places.mv.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WhereToGoServer/gradle.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../../WhereToGoServer/gradle.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../WhereToGoServer/src/main/kotlin/com/example/routes/PlaceRoutes.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../../WhereToGoServer/src/main/kotlin/com/example/routes/PlaceRoutes.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,8 +73,8 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/app/src/main/res/drawable-v24" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/build.gradle" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
     <key name="android.template.-986211284">
@@ -100,7 +106,7 @@
       </method>
     </configuration>
     <configuration name="app" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false">
-      <module name="Kuda_poyti.app" />
+      <module name="WhereToGo.app" />
       <option name="DEPLOY" value="true" />
       <option name="DEPLOY_APK_FROM_BUNDLE" value="false" />
       <option name="DEPLOY_AS_INSTANT" value="false" />

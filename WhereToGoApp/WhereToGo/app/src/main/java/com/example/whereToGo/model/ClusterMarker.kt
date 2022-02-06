@@ -6,6 +6,7 @@ import com.google.maps.android.clustering.ClusterItem
 
 class ClusterMarker (
 
+    val id: Int,
     private val position: LatLng,
     private val title: String,
     private val snippet: String,
@@ -19,5 +20,4 @@ class ClusterMarker (
     override fun getTitle() = title
 
     override fun getSnippet() = snippet
-
 }

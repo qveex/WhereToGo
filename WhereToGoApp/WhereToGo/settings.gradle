@@ -1,2 +1,2 @@
-rootProject.name = "Kuda poyti"
+rootProject.name = "WhereToGo"
 include ':app'

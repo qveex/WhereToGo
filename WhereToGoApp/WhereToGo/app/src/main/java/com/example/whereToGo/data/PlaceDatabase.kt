@@ -8,7 +8,7 @@ import androidx.room.TypeConverters
 import com.example.whereToGo.utilities.Converters
 import com.example.whereToGo.model.Place
 
-@Database(entities = [Place::class], version = 2, exportSchema = false)
+@Database(entities = [Place::class], version = 1, exportSchema = false)
 @TypeConverters(Converters::class)
 abstract class PlaceDatabase: RoomDatabase() {
 

@@ -47,7 +47,6 @@ fun Route.placesRouting() {
             val place = call.receive<Place>()
             placeDao.add(place)
             call.respond(place)
-
         }
 
         get("delete/{id}") {
@@ -75,6 +74,7 @@ fun Route.placesRouting() {
                 call.respondText("Not Found", status = HttpStatusCode.NotFound)
             }
         }
+
     }
 }
 

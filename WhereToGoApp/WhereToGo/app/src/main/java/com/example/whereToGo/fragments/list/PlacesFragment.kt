@@ -43,7 +43,7 @@ class PlacesFragment : Fragment() {
         view.places_list.adapter = adapter
         view.places_list.layoutManager = LinearLayoutManager(requireContext())
 
-        if (isOnline(requireContext())) {
+        /*if (isOnline(requireContext())) {
 
             placeViewModelServer.getCity("Saint Petersburg")
             placeViewModelServer.listResponse.observe(requireActivity(), Observer { response ->
@@ -56,12 +56,12 @@ class PlacesFragment : Fragment() {
                     Toast.makeText(requireContext(), "Ошибка соединения", Toast.LENGTH_LONG).show()
                 }
             })
-        } else {
+        } else {*/
             Toast.makeText(requireContext(), "Ошибка соединения", Toast.LENGTH_LONG).show()
             placeViewModelDb.getAllData.observe(requireActivity(), {
                 adapter.setData(it)
             })
-        }
+        //}
 
         return view
     }

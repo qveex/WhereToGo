@@ -102,26 +102,23 @@ class AddFragment : Fragment(), OnMapReadyCallback {
 
     private fun insertData() {
 
-        if (img != null) {
-
-            val converter = Converters()
-
+        img?.let {
             val newPlace = Place(
                 0,
                 item_get_name.text.toString(),
                 item_get_description.text.toString(),
                 0,
-                converter.fromBitmap(img!!).toString(),
+                it,
                 positionMarker!!.position.latitude,
                 positionMarker!!.position.longitude,
                 "Saint Petersburg"
             )
+
             // add to db
-            //placeViewModelDb.addPlace(newPlace)
+            placeViewModelDb.addPlace(newPlace)
 
             // add to server
-
-            placeViewModelServer.createPlace(newPlace)
+            /*placeViewModelServer.createPlace(newPlace)
             placeViewModelServer.singleResponse.observe(requireActivity(), Observer { response ->
                 if (response.isSuccessful) {
                     Log.i("Response", response.body().toString())
@@ -130,14 +127,13 @@ class AddFragment : Fragment(), OnMapReadyCallback {
                 } else {
                     Log.i("Response", response.code().toString())
                 }
-            })
+            })*/
 
             Toast.makeText(requireContext(), "Место добавлено успешно!", Toast.LENGTH_LONG).show()
             findNavController().navigate(R.id.action_addFragment_to_mapsFragment)
 
-        } else {
-            Toast.makeText(requireContext(), "Попробуйте выбрать изображение еще раз", Toast.LENGTH_LONG).show()
         }
 
+        if (img == null) Toast.makeText(requireContext(), "Попробуйте выбрать изображение еще раз", Toast.LENGTH_LONG).show()
     }
 }
